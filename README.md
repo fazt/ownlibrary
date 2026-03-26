@@ -2,6 +2,27 @@
 
 Sistema interno de gestión de biblioteca con backend en Node.js/Express, frontend en React 18/Vite/MUI y base de datos MongoDB. Incluye CRUD completo para libros y artículos académicos, manejo de usuarios con roles, dashboard con dark mode y gestión de préstamos.
 
+## Inicio Rápido
+
+```bash
+# 1. Instalar dependencias (desde la raíz del proyecto)
+cd backend && npm install && cd ../frontend && npm install && cd ..
+
+# 2. Configurar variables de entorno
+cp backend/.env.example backend/.env   # edita con tu MONGODB_URI y JWT_SECRET
+
+# 3. Levantar backend (terminal 1)
+cd backend && npm run dev
+
+# 4. Levantar frontend (terminal 2)
+cd frontend && npm run dev
+
+# 5. (Opcional) Cargar datos de ejemplo
+cd backend
+node scripts/createUsers.mjs
+node scripts/seedBooks.mjs
+```
+
 ## Stack Tecnológico
 
 | Capa | Tecnologías |
@@ -160,6 +181,16 @@ NODE_ENV=development
 VITE_API_URL=http://localhost:5000/api
 ```
 
+## Usuarios Demo
+
+Al ejecutar `node scripts/createUsers.mjs` se crean estos usuarios:
+
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Admin | `admin@biblioteca.com` | `admin123` |
+| Librarian | `librarian@biblioteca.com` | `librarian123` |
+| User | `usuario@biblioteca.com` | `usuario123` |
+
 ## Desarrollo
 
 ### Backend en modo desarrollo
@@ -175,6 +206,15 @@ cd frontend
 npm run dev     # Vite dev server (puerto 3000)
 npm run build   # Build de producción
 npm run preview # Preview del build
+```
+
+### Pruebas E2E (TestSprite)
+```bash
+# Asegura backend en :5000 y frontend en :5173
+cd frontend && npm run dev -- --port 5173
+
+# En otra terminal, desde la raíz del proyecto
+npx @testsprite/testsprite-mcp generateCodeAndExecute
 ```
 
 ## Próximos Pasos
