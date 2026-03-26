@@ -4,35 +4,20 @@ Sistema interno de gestión de biblioteca con backend en Node.js/Express, fronte
 
 ## Inicio Rápido
 
-1. Instalar dependencias:
-
 ```bash
-cd backend && npm install
-cd ../frontend && npm install
-```
+# 1. Instalar dependencias (desde la raíz del proyecto)
+cd backend && npm install && cd ../frontend && npm install && cd ..
 
-2. Configurar backend:
+# 2. Configurar variables de entorno
+cp backend/.env.example backend/.env   # edita con tu MONGODB_URI y JWT_SECRET
 
-```bash
-cd backend
-cp .env.example .env
-```
+# 3. Levantar backend (terminal 1)
+cd backend && npm run dev
 
-3. Levantar backend y frontend en dos terminales:
+# 4. Levantar frontend (terminal 2)
+cd frontend && npm run dev
 
-```bash
-# terminal 1
-cd backend
-npm run dev
-
-# terminal 2
-cd frontend
-npm run dev
-```
-
-4. (Opcional) Cargar datos iniciales:
-
-```bash
+# 5. (Opcional) Cargar datos de ejemplo
 cd backend
 node scripts/createUsers.mjs
 node scripts/seedBooks.mjs
@@ -87,13 +72,6 @@ npm run dev
 ```
 
 La aplicación estará disponible en `http://localhost:3000`
-
-Nota para pruebas E2E (TestSprite): si necesitas usar puerto `5173`, ejecuta:
-
-```bash
-cd frontend
-npm run dev -- --port 5173
-```
 
 ### 3. Seed de datos (opcional)
 
@@ -203,13 +181,15 @@ NODE_ENV=development
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## Usuarios Demo (Seed)
+## Usuarios Demo
 
 Al ejecutar `node scripts/createUsers.mjs` se crean estos usuarios:
 
-- Admin: `admin@biblioteca.com` / `admin123`
-- Librarian: `librarian@biblioteca.com` / `librarian123`
-- User: `usuario@biblioteca.com` / `usuario123`
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Admin | `admin@biblioteca.com` | `admin123` |
+| Librarian | `librarian@biblioteca.com` | `librarian123` |
+| User | `usuario@biblioteca.com` | `usuario123` |
 
 ## Desarrollo
 
@@ -230,12 +210,11 @@ npm run preview # Preview del build
 
 ### Pruebas E2E (TestSprite)
 ```bash
-# Asegura backend en 5000 y frontend en 5173
-cd frontend
-npm run dev -- --port 5173
+# Asegura backend en :5000 y frontend en :5173
+cd frontend && npm run dev -- --port 5173
 
-# En otra terminal (raíz del proyecto)
-node <ruta-a-testsprite-mcp> generateCodeAndExecute
+# En otra terminal, desde la raíz del proyecto
+npx @testsprite/testsprite-mcp generateCodeAndExecute
 ```
 
 ## Próximos Pasos
