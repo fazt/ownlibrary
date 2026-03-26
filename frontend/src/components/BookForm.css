@@ -1,0 +1,89 @@
+.book-form-card {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: color-mix(in oklab, var(--surface) 92%, transparent);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.book-form-card h3 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.book-form-card p {
+  margin: 0.35rem 0 0;
+  color: var(--text-soft);
+}
+
+.book-form-error {
+  margin: 0.9rem 0 0;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.book-form-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.book-form-grid label {
+  display: grid;
+  gap: 0.26rem;
+}
+
+.book-form-grid span {
+  font-size: 0.84rem;
+  color: var(--text-soft);
+}
+
+.book-form-grid input,
+.book-form-grid textarea {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.66rem 0.7rem;
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
+.book-form-col-span {
+  grid-column: span 2;
+}
+
+.book-form-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn-primary,
+.btn-outline {
+  border-radius: 999px;
+  border: 0;
+  padding: 0.65rem 1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #f8fafc;
+  background: linear-gradient(120deg, var(--brand), var(--brand-2));
+}
+
+.btn-outline {
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .book-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .book-form-col-span {
+    grid-column: span 1;
+  }
+}

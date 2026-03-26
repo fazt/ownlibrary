@@ -1,0 +1,20 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5173",
+  "loginUser": "admin@biblioteca.com",
+  "loginPassword": "admin123",
+  "executionArgs": {
+    "projectName": "ownlibrary",
+    "projectPath": "c:\\Users\\fazt\\Desktop\\ownlibrary",
+    "testIds": [],
+    "additionalInstruction": "Re-ejecutar todo el plan para validar correcciones recientes en login, filtros, eliminacion y tema oscuro.",
+    "serverMode": "production",
+    "envs": {
+      "API_KEY": "sk-user-LzMq3nUe7emDIHomQSdYRHqDpHa_PUzQX-ET325QH8EOSgtGiHv_GS0xjofVl6OGmyWdf_fvBtjPwXl41xLlaKfWrAvJloW9oMR04VhCYYRYqJv4zR4me2vl8exVy3UFpS8"
+    }
+  },
+  "serverPort": 57393,
+  "proxy": "http://c6a9e44d-c961-4773-b296-feb44df4d464:OAlMwBCu0hdihIPcKfUvqwoaOZBXcKu2@tun.testsprite.com:8080"
+}

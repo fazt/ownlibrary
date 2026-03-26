@@ -1,0 +1,921 @@
+[
+  {
+    "id": "TC001",
+    "title": "Registro exitoso crea sesión y muestra el dashboard",
+    "description": "Verifica que un usuario pueda registrarse y que, tras el registro, se cree sesión y se muestre el dashboard en la ruta raíz.",
+    "category": "Autenticación de usuarios",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Registro\" / \"Registrarse\" mode"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Usuario Prueba\" into the name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"usuario.prueba+reg1@example.com\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Password123!\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Registrarse\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Dashboard\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Login exitoso con credenciales válidas redirige al dashboard",
+    "description": "Verifica que un usuario pueda iniciar sesión con email y contraseña válidos y acceder a la pantalla principal.",
+    "category": "Autenticación de usuarios",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Login\" / \"Iniciar sesión\" mode"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Iniciar sesión\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Dashboard\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Login fallido muestra error y permanece en login",
+    "description": "Verifica que, con credenciales incorrectas, la UI muestre un mensaje de error y no permita el acceso.",
+    "category": "Autenticación de usuarios",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Login\" / \"Iniciar sesión\" mode"
+      },
+      {
+        "type": "action",
+        "description": "Type \"no.existe@example.com\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"WrongPassword!\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Iniciar sesión\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"credenciales\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Registro fallido por email inválido o faltante muestra validación",
+    "description": "Verifica que el formulario de registro muestre validación visible cuando el email es inválido o está vacío.",
+    "category": "Autenticación de usuarios",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Registro\" / \"Registrarse\" mode"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Usuario Sin Email\" into the name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"correo-invalido\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Password123!\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Registrarse\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"email\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Registro fallido por contraseña vacía muestra validación",
+    "description": "Verifica que el formulario de registro no permita enviar si falta la contraseña y muestre un mensaje visible.",
+    "category": "Autenticación de usuarios",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Registro\" / \"Registrarse\" mode"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Usuario Sin Password\" into the name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"usuario.prueba+reg2@example.com\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Registrarse\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"contraseña\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Cambiar entre modos Login y Registro actualiza los campos visibles",
+    "description": "Verifica que el usuario pueda alternar entre modo login y modo registro y que los campos esperados aparezcan/oculten correctamente.",
+    "category": "Autenticación de usuarios",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Email\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Contraseña\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Registro\" / \"Registrarse\" mode"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Nombre\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the control that switches to \"Login\" / \"Iniciar sesión\" mode"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Nombre\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Acceso al dashboard y visualización del listado de libros tras iniciar sesión",
+    "description": "Verifica que un usuario autenticado puede ver la tabla/listado de libros en el dashboard.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Libros\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"tabla de libros\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Búsqueda por texto filtra el listado de libros",
+    "description": "Verifica que la búsqueda por texto actualiza la tabla mostrando resultados filtrados.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"harry\" into the book search field"
+      },
+      {
+        "type": "action",
+        "description": "Press \"Enter\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"harry\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"tabla de libros\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Filtro por género aplica correctamente y actualiza la tabla",
+    "description": "Verifica que seleccionar un género filtra el listado de libros en la tabla.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "action",
+        "description": "Select \"Fantasía\" from the genre dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Aplicar filtro\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Fantasía\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"tabla de libros\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Crear un nuevo libro (rol con permisos) y verlo en la tabla",
+    "description": "Verifica que un usuario con permisos puede crear un libro desde el modal y luego verlo listado.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nuevo Libro\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Nuevo Libro\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Libro E2E 001\" into the title field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Guardar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Libro E2E 001\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Validación por ISBN duplicado al crear libro mantiene el formulario abierto",
+    "description": "Verifica que al intentar guardar un libro con ISBN existente se muestra un error y no se cierra el formulario.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Nuevo Libro\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"ISBN-DUPLICADO\" into the ISBN field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Guardar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"ISBN\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"duplicado\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Editar un libro existente y ver los cambios reflejados en la tabla",
+    "description": "Verifica que el flujo de edición actualiza los datos visibles del libro en el listado.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Editar\" in the first visible book row"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Editar Libro\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \" (Editado)\" into the title field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Guardar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Editado\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Eliminar un libro como admin y verificar que desaparece de la tabla",
+    "description": "Verifica que un admin puede eliminar un libro confirmando en el modal y que el libro deja de mostrarse.",
+    "category": "Gestión de libros",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Eliminar\" in the first visible book row"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Confirmar eliminación\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Confirmar\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"tabla de libros\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Eliminado\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Usuario sin rol admin intenta eliminar y ve mensaje de permiso denegado",
+    "description": "Verifica que un usuario sin permiso de admin no puede eliminar un libro y se muestra un mensaje de error manteniendo el libro en la tabla.",
+    "category": "Gestión de libros",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"usuario_sin_admin@example.com\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"password_incorrecta_o_no_admin\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Iniciar sesión\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Eliminar\" in the first visible book row"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"permiso\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"tabla de libros\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Activar modo oscuro desde la barra superior (usuario autenticado)",
+    "description": "Verifica que el usuario puede activar el modo oscuro desde la barra superior y que la UI refleja el cambio.",
+    "category": "Preferencias de interfaz",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Login\" or \"Iniciar sesión\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Dashboard\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the dark mode toggle/control in the top bar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dark\" or \"Oscuro\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Desactivar modo oscuro volviendo a modo claro",
+    "description": "Verifica que el usuario puede alternar nuevamente al modo claro y que la UI muestra el estado actualizado.",
+    "category": "Preferencias de interfaz",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Login\" or \"Iniciar sesión\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Dashboard\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the dark mode toggle/control in the top bar"
+      },
+      {
+        "type": "action",
+        "description": "Click on the dark mode toggle/control in the top bar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Light\" or \"Claro\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Cerrar sesión desde la barra superior y volver a Login",
+    "description": "Verifica que el usuario puede cerrar sesión y que se muestra nuevamente el formulario de login.",
+    "category": "Preferencias de interfaz",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Login\" or \"Iniciar sesión\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Dashboard\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Logout\" or \"Cerrar sesión\" button in the top bar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Login\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Password\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Persistencia de tema al recargar (modo oscuro queda aplicado)",
+    "description": "Verifica que, tras activar modo oscuro, al recargar la aplicación se mantiene el tema aplicado visualmente.",
+    "category": "Preferencias de interfaz",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Login\" or \"Iniciar sesión\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click on the dark mode toggle/control in the top bar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dark\" or \"Oscuro\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dark\" or \"Oscuro\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Persistencia de tema al reabrir la app (arranca con modo oscuro)",
+    "description": "Verifica que, si el tema ya estaba en oscuro, al abrir la app se renderiza automáticamente en modo oscuro tras iniciar sesión.",
+    "category": "Preferencias de interfaz",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Login\" or \"Iniciar sesión\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Dashboard\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dark\" or \"Oscuro\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Logout después de activar modo oscuro (flujo combinado)",
+    "description": "Verifica que el usuario puede activar modo oscuro y luego cerrar sesión correctamente en la misma sesión.",
+    "category": "Preferencias de interfaz",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Login\" or \"Iniciar sesión\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click on the dark mode toggle/control in the top bar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dark\" or \"Oscuro\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Logout\" or \"Cerrar sesión\" button in the top bar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Login\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Dashboard: la sección Artículos no muestra tabla ni controles de gestión (limitación conocida)",
+    "description": "Verifica que al intentar acceder a Artículos desde el dashboard no exista tabla de datos ni controles CRUD visibles, confirmando la UI faltante.",
+    "category": "Artículos (API, UI pendiente)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Login\" (or \"Iniciar sesión\")"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dashboard\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Artículos\" tab/section in the dashboard navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"No hay datos\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Dashboard: al abrir Artículos no aparecen acciones de crear/editar/eliminar (limitación conocida)",
+    "description": "Verifica que la vista de Artículos carece de botones o acciones visibles para gestionar artículos desde la UI.",
+    "category": "Artículos (API, UI pendiente)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Login\" (or \"Iniciar sesión\")"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dashboard\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Artículos\" tab/section in the dashboard navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Create Article\" button is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "Login: credenciales inválidas impiden acceder al dashboard para intentar ver Artículos",
+    "description": "Verifica que con credenciales inválidas no se accede al dashboard, por lo que no se puede llegar a la sección Artículos.",
+    "category": "Artículos (API, UI pendiente)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"fake_user@example.com\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"wrong-password\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Login\" (or \"Iniciar sesión\")"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  }
+]

@@ -1,0 +1,84 @@
+version: "2"
+type: frontend
+tech_stack:
+  - JavaScript
+  - React 18
+  - Vite 4
+  - Material UI v5
+  - Axios
+  - Node.js/Express API
+routes:
+  - path: /
+    file: frontend/src/main.jsx
+    auth_required: false
+    description: App raíz; muestra Login cuando no hay sesión o Dashboard cuando hay sesión
+  - path: /login
+    file: frontend/src/components/Login.jsx
+    auth_required: false
+    description: Pantalla de autenticación manejada por estado interno en la SPA
+features:
+  - name: Autenticación de usuarios
+    description: Registro e inicio de sesión con JWT y persistencia en localStorage
+    files:
+      - frontend/src/components/Login.jsx
+      - frontend/src/api/client.js
+      - frontend/src/main.jsx
+    entry_route: /login
+    user_interactions:
+      - Escribir nombre, email y contraseña en el modo registro
+      - Enviar formulario para crear una cuenta
+      - Cambiar al modo login
+      - Escribir email y contraseña
+      - Hacer clic en el botón de iniciar sesión
+    api_calls:
+      - method: POST
+        endpoint: /api/auth/register
+      - method: POST
+        endpoint: /api/auth/login
+      - method: GET
+        endpoint: /api/auth/me
+    auth_required: false
+  - name: Gestión de libros
+    description: Listado de libros con búsqueda y género, más creación/edición/eliminación según rol
+    files:
+      - frontend/src/components/Dashboard.jsx
+      - frontend/src/components/BookForm.jsx
+      - frontend/src/api/client.js
+    entry_route: /
+    user_interactions:
+      - Iniciar sesión para ver el dashboard
+      - Buscar libros por texto
+      - Filtrar libros por género
+      - Abrir modal para crear un libro
+      - Editar libro existente desde la tabla
+      - Eliminar libro (solo admin) desde la tabla
+    api_calls:
+      - method: GET
+        endpoint: /api/books
+      - method: GET
+        endpoint: /api/books/:id
+      - method: POST
+        endpoint: /api/books
+      - method: PUT
+        endpoint: /api/books/:id
+      - method: DELETE
+        endpoint: /api/books/:id
+    auth_required: true
+  - name: Preferencias de interfaz
+    description: Cambio de tema claro/oscuro y cierre de sesión desde la barra superior
+    files:
+      - frontend/src/main.jsx
+      - frontend/src/components/Dashboard.jsx
+    entry_route: /
+    user_interactions:
+      - Activar o desactivar el modo oscuro
+      - Cerrar sesión desde el botón de logout
+    api_calls: []
+    auth_required: true
+known_limitations:
+  - issue: La pestaña de artículos no tiene tabla de datos renderizada en el dashboard
+    location: frontend/src/components/Dashboard.jsx
+    impact: No se puede gestionar artículos desde la UI aunque existan endpoints backend
+  - issue: No se usa BrowserRouter; la navegación se maneja por estado y localStorage
+    location: frontend/src/main.jsx
+    impact: Las rutas directas y deep links no están soportadas de forma estándar

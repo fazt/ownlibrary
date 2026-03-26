@@ -1,0 +1,24 @@
+- generic [ref=e5]:
+  - heading "📚 Sistema de Biblioteca" [level=4] [ref=e6]
+  - generic [ref=e7]:
+    - generic [ref=e8]:
+      - generic:
+        - text: Correo electrónico
+        - generic: "*"
+      - generic [ref=e9]:
+        - textbox "Correo electrónico" [ref=e10]
+        - group:
+          - generic: Correo electrónico *
+    - generic [ref=e11]:
+      - generic:
+        - text: Contraseña
+        - generic: "*"
+      - generic [ref=e12]:
+        - textbox "Contraseña" [ref=e13]
+        - group:
+          - generic: Contraseña *
+    - button "Iniciar sesión" [ref=e14] [cursor=pointer]: Iniciar sesión
+    - paragraph [ref=e15]:
+      - text: ¿No tienes cuenta?
+      - link "Registrate" [ref=e16] [cursor=pointer]:
+        - /url: "#"
